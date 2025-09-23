@@ -49,13 +49,17 @@ class auth{
             }
 
             if(!count($errors)) {
-                // die($fullname . " " . $email . " " . $password);
+                $activation_code = rand(100000, 999999);
+                // store users in the database
+                require_once 'Globals/userdb.php';
+                $ObjUserDB = new userdb();
+                $ObjUserDB->addUser($conf, $fullname, $email, $password, $activation_code);
 
                 // Send verification email
                 $EmailVariables = [
                     'site_name' => $conf['site_name'],
                     'fullname' => $fullname,
-                    'activation_code' => rand(100000, 999999), // In real applications, generate a secure activation code
+                    'activation_code' => $activation_code, // In real applications, generate a secure activation code
                     'mail_from_name' => $conf['mail_from_name']
                 ];
 

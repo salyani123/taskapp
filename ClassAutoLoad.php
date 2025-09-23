@@ -21,5 +21,6 @@ $ObjForm = new forms();
 $ObjLayout = new layouts();
 $ObjAuth = new auth($conf);
 $ObjFncs = new fncs();
+$ObjUserDB = new userdb($conf);
 
 $ObjAuth->signup($conf, $ObjFncs, $lang, $ObjSendMail);
