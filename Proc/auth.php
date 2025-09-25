@@ -60,6 +60,8 @@ class auth{
                     'site_name' => $conf['site_name'],
                     'fullname' => $fullname,
                     'activation_code' => $activation_code, // In real applications, generate a secure activation code
+                    'site_url' => $conf['site_url'],
+                    'user_email' => $email,
                     'mail_from_name' => $conf['mail_from_name']
                 ];
 

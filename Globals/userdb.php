@@ -25,4 +25,19 @@ class userdb {
     public function getUsers() {
         return $this->users;
     }
+
+    // activate user account
+    public function activateUser($conf, $name, $email, $code) {
+        try{
+            $db = new PDO("mysql:host={$conf['db_host']};dbname={$conf['db_name']}", $conf['db_user'], $conf['db_pass']);
+            $stmt = $db->prepare("UPDATE users SET is_verified = 'yes' WHERE activation_id = :code AND name = :name AND email = :email");
+            $stmt->bindParam(':code', $code);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+
+    }
 }
